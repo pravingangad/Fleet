@@ -50,7 +50,7 @@ class RegisterForm(FlaskForm):
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+    return render_template('index.html')
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -84,8 +84,8 @@ def signup():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-
-	return render_template('dash.html',name=current_user.username)
+    pagination=db.session.query(Movie.id,Movie.title,Movie.genre,Movie.year,Movie.release_date,Movie.votes,Movie.reviews).all()
+    return render_template('dash.html',name=current_user.username,pagination=pagination)
 
 @app.route('/logout')
 @login_required

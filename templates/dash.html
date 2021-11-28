@@ -10,84 +10,96 @@ Dashboard
 {% endblock %}
 
 {% block content %}
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">
-          <img src="/static/logo.png" style="height: 50px;width:100px;"></a>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+        aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img src="/static/logo.png" style="height: 50px;width:100px;"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <input type="text" class="form-control" placeholder="Search...">
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid ">
+  <div class="row">
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin-top:70px">
+      <h1 class="page-header">Welcome, {{ name }}</h1>
+
+      <div class="row placeholders">
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <img src="/static/poster1.jpg" width="200" height="200" class="img-responsive" alt="kabir singh">
+          <h4>Action</h4>
+          <span class="text-muted">Kabir Singh</span>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <img src="/static/poster2.jpg" width="200" height="200" class="img-responsive"
+            alt="Generic placeholder thumbnail">
+          <h4>Action</h4>
+          <span class="text-muted">Raees</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <img src="/static/poster3.jpeg" width="200" height="200" class="img-responsive" alt="munna michel">
+          <h4>Thiller</h4>
+          <span class="text-muted">munna michel</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <img src="/static/poster4.jpg" width="200" height="200" class="img-responsive" alt="desi boys">
+          <h4>Comdey</h4>
+          <span class="text-muted">Desy Boys</span>
         </div>
       </div>
-    </nav>
 
-    <div class="container-fluid ">
-      <div class="row" >
-         
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="margin-top:70px">
-          <h1 class="page-header" >Welcome, {{ name }}</h1>
+      <h2 class="sub-header">Movie List </h2>
+      <a href="{{url_for('get_movies')}}" class="waves-effect">Show List of Movies</a </div> </div> </div> </div> <div
+        class="container-fluid">
+      {% if pagination%}
+      <table id="dtTable" class="table table-striped table-bordered table-sm " cellspacing="0" width="100%">
+        <!--Table head-->
+        <thead class="tableheading">
+          <tr>
+            <th class="th_sm">ID<i aria-hidden="true"></i></th>
+            <th class="th_sm">Title <i aria-hidden="true"></i></th>
+            <th class="th_sm">Genre <i aria-hidden="true"></i></th>
+            <th class="th_sm">Year <i aria-hidden="true"></i></th>
+            <th class="th_sm">Release Date <i aria-hidden="true"></i></th>
+            <th class="th_sm">Votes <i aria-hidden="true"></i></th>
+            <th class="th_sm">Reviews <i aria-hidden="true"></i></th>
+          </tr>
+        </thead>
+        {% for recs in pagination %}
+        <tr>
+          <td>{{recs.0}}</td>
+          <td>{{recs.1}}</td>
+          <td>{{recs.2}}</td>
+          <td>{{recs.3}}</td>
+          <td>{{recs.4}}</td>
+          <td>{{recs.5}}</td>
+          <td>{{recs.6}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="/static/poster1.jpg" width="200" height="200" class="img-responsive" alt="kabir singh">
-              <h4>Action</h4>
-              <span class="text-muted">Kabir Singh</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="/static/poster2.jpg" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Action</h4>
-              <span class="text-muted">Raees</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="/static/poster3.jpeg" width="200" height="200" class="img-responsive" alt="munna michel">
-              <h4>Thiller</h4>
-              <span class="text-muted">munna michel</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="/static/poster4.jpg" width="200" height="200" class="img-responsive" alt="desi boys">
-              <h4>Comdey</h4>
-              <span class="text-muted">Desy Boys</span>
-            </div>
-          </div>
+      {% endblock %}
 
-          <h2 class="sub-header">Movie List </h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Movie Title</th>
-                  <th>Movie year</th>
-                  <th>Movie votes</th>
-                  <th>Movie genre</th>
-                  <th>Movie release date</th>
-                  <th>Movie reviews</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                <tr>
-                  
-                </tr>
-               
-              </tbody>
-            </table>
-          </div>
-        </div>
-</div>
-    </div>
-{% endblock %}
+      {% block scripts %}
+
+      {% endblock %}
